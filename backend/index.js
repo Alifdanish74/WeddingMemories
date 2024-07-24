@@ -9,11 +9,12 @@ const app = express();
 const port = process.env.PORT;
 
 // Allow requests from the frontend domain
-app.use(
-  cors({
-    origin: "https://wedding-memories-client.vercel.app", // Update this to your actual frontend URL
-  })
-);
+const corsOptions = {
+  origin: 'https://wedding-memories-client.vercel.app', // Update this to your actual frontend URL
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type, Authorization'
+};
+app.use(cors(corsOptions));
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
