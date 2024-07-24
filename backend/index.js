@@ -9,11 +9,11 @@ const app = express();
 const port = process.env.PORT;
 
 // Allow requests from the frontend domain
-app.use(cors({
-  origin: 'https://wedding-memories-client.vercel.app' // Update this to your actual frontend URL
-}));
-
-
+app.use(
+  cors({
+    origin: "https://wedding-memories-client.vercel.app", // Update this to your actual frontend URL
+  })
+);
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
@@ -66,6 +66,18 @@ const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
 
 // Middleware for error handling
 const asyncHandler = (fn) => (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  // another common pattern
+  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
