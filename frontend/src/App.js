@@ -17,7 +17,7 @@ function App() {
     formData.append('file', state.file);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      const response = await axios.post('https://wedding-memories-server-1xhfzhmfz-alif-danishs-projects.vercel.app/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -46,7 +46,7 @@ function App() {
         </button>
       </form>
       {state.message && <p className="mt-4">{state.message}</p>}
-      {state.message && <p className="mt-4">{state.message}</p>}
+
     </div>
   );
 }
