@@ -8,7 +8,11 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 
-app.use(cors());
+// Allow requests from the frontend domain
+app.use(cors({
+  origin: 'https://wedding-memories-client.vercel.app' // Update this to your actual frontend URL
+}));
+
 
 
 const oauth2Client = new google.auth.OAuth2(
